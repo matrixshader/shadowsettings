@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Shadow Settings
+Comment=The settings hiding in the shadow of your system
+GenericName=System Settings
+Exec=shadow-settings
+Icon=io.github.matrixshader.ShadowSettings
+Terminal=false
+Type=Application
+Categories=Settings;System;GTK;
+Keywords=settings;preferences;tweaks;power;lid;fonts;
+StartupNotify=true

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#1a1a2e"/>
+  <circle cx="64" cy="64" r="56" fill="none" stroke="#00ff41" stroke-width="1.5" opacity="0.6"/>
+  <!-- Matrix-style gear/settings icon -->
+  <g transform="translate(64,64)">
+    <!-- Outer gear teeth -->
+    <g fill="#00ff41" opacity="0.9">
+      <rect x="-4" y="-40" width="8" height="12" rx="2"/>
+      <rect x="-4" y="28" width="8" height="12" rx="2"/>
+      <rect x="-40" y="-4" width="12" height="8" rx="2"/>
+      <rect x="28" y="-4" width="12" height="8" rx="2"/>
+      <rect x="22" y="-30" width="8" height="12" rx="2" transform="rotate(45)"/>
+      <rect x="-30" y="22" width="8" height="12" rx="2" transform="rotate(45)"/>
+      <rect x="22" y="22" width="8" height="12" rx="2" transform="rotate(-45)"/>
+      <rect x="-30" y="-30" width="8" height="12" rx="2" transform="rotate(-45)"/>
+    </g>
+    <!-- Outer ring -->
+    <circle r="28" fill="none" stroke="#00ff41" stroke-width="3" opacity="0.8"/>
+    <!-- Inner ring -->
+    <circle r="14" fill="none" stroke="#00ff41" stroke-width="2.5"/>
+    <!-- Center dot -->
+    <circle r="5" fill="#00ff41"/>
+    <!-- Digital rain hint -->
+    <text x="-18" y="-44" fill="#00ff41" font-family="monospace" font-size="8" opacity="0.4">01</text>
+    <text x="12" y="-44" fill="#00ff41" font-family="monospace" font-size="8" opacity="0.3">10</text>
+    <text x="-18" y="50" fill="#00ff41" font-family="monospace" font-size="8" opacity="0.3">11</text>
+    <text x="12" y="50" fill="#00ff41" font-family="monospace" font-size="8" opacity="0.4">00</text>
+  </g>
+</svg>
