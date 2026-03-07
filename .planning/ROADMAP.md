@@ -12,7 +12,7 @@
 **Plans:** 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Rename app from Construct to Shadow Settings, set app ID to io.github.matrixshader.ShadowSettings
+- [x] 01-01-PLAN.md — Rename app from Construct to Shadow Settings, set app ID to io.github.matrixshader.ShadowSettings
 - [ ] 01-02-PLAN.md — Create SafeSettings helper and null-guard all GSettings access across panels
 
 **Success criteria:**
