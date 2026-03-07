@@ -9,6 +9,12 @@
 
 **Requirements addressed:** NFR-6 (App Identity), FR-1 (null-guarding)
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Rename app from Construct to Shadow Settings, set app ID to io.github.matrixshader.ShadowSettings
+- [ ] 01-02-PLAN.md — Create SafeSettings helper and null-guard all GSettings access across panels
+
 **Success criteria:**
 - [ ] App ID set to `io.github.matrixshader.ShadowSettings` (or finalized alternative)
 - [ ] All files updated: meson.build, desktop file, polkit policy, icon paths, application.vala
