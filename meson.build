@@ -22,6 +22,7 @@ sources = files(
   'src/panels/appearance.vala',
   'src/panels/input.vala',
   'src/helpers/logind-helper.vala',
+  'src/helpers/safe-settings.vala',
 )
 
 executable('shadow-settings',
