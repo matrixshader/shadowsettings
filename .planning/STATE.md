@@ -1,14 +1,14 @@
 # Shadow Settings — Project State
 
 ## Current Phase
-Phase 1: App Identity & Foundation (IN PROGRESS - Plan 2 of 2)
+Phase 1: App Identity & Foundation (COMPLETE - 2 of 2 plans done)
 
 ## Progress
 - [x] Project initialized
 - [x] Research complete (Stack, Features, Architecture, Pitfalls)
 - [x] Requirements defined
 - [x] Roadmap created (5 phases)
-- [ ] Phase 1: App Identity & Foundation
+- [x] Phase 1: App Identity & Foundation
 - [ ] Phase 2: Dynamic Detection Engine
 - [ ] Phase 3: Widget Factory & Panel Generation
 - [ ] Phase 4: Visual Identity & Design
@@ -23,6 +23,8 @@ Phase 1: App Identity & Foundation (IN PROGRESS - Plan 2 of 2)
 | Detection | Dynamic schema scanning at runtime | Self-maintaining, works across distros/versions |
 | Distribution | Flathub (Flatpak) + native | Flathub for reach, native for full features (logind) |
 | Brand | Standalone, not Matrix Shader product | Links to Matrix Shader in About dialog, but separate project |
+| Missing schema UX | Silent skip, no empty-state UI | Phase 1 simplicity; better UX deferred to Phase 3 widget factory |
+| SafeSettings pattern | Static helper with cached SettingsSchemaSource | All GSettings access via SafeSettings.try_get(), never direct constructor |
 
 ## Critical Findings from Research
 1. Every `new GLib.Settings()` in prototype will crash on missing schemas — must null-guard (Phase 1)
@@ -40,15 +42,17 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 - Zero custom CSS
 - All hardcoded — no dynamic detection
 - App ID: `io.github.matrixshader.ShadowSettings` (DONE - Plan 01-01)
+- All GSettings access null-guarded via SafeSettings helper (DONE - Plan 01-02)
 
 ## Plan Completion
 | Phase | Plan | Status | Duration | Commit |
 |-------|------|--------|----------|--------|
 | 01 | 01-01 (App Identity Rename) | COMPLETE | 5min | 3a9e0b0, 7cf54a5 |
+| 01 | 01-02 (SafeSettings Null-Guarding) | COMPLETE | 3min | 74f210b, d5c689b |
 
 ## Last Session
-- **Stopped at:** Completed 01-01-PLAN.md
-- **Timestamp:** 2026-03-07T03:57:40Z
+- **Stopped at:** Completed 01-02-PLAN.md (Phase 1 complete)
+- **Timestamp:** 2026-03-07T04:03:53Z
 
 ## Next Action
-Execute 01-02-PLAN.md (SafeSettings null-guarding).
+Execute Phase 2: Dynamic Detection Engine.
