@@ -55,11 +55,11 @@ Plans:
 
 **Requirements addressed:** FR-3 (Widget Factory), FR-5 (Reset to Default + Changed Highlighting), FR-7 (Logind gating)
 
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 03-01-PLAN.md — Create WidgetFactory static class with all widget creators, reset-to-default, and changed-settings highlighting
-- [ ] 03-02-PLAN.md — Wire factory into window.vala with lazy panel construction, remove dead hardcoded panels
+- [x] 03-02-PLAN.md — Wire factory into window.vala with lazy panel construction, remove dead hardcoded panels
 
 **Success criteria:**
 - [x] `WidgetFactory` that maps `SettingsSchemaKey.get_value_type()` + `get_range()` to correct Adwaita widget
@@ -68,8 +68,8 @@ Plans:
 - [x] Range constraints enforced — cannot set invalid values
 - [x] Reset-to-default action on each setting (compare current vs default value)
 - [x] Changed settings visually highlighted (CSS class on modified rows)
-- [ ] Logind features auto-hidden when `/.flatpak-info` exists
-- [ ] Lazy panel construction (build widgets only on first panel visit)
+- [x] Logind features auto-hidden when `/.flatpak-info` exists
+- [x] Lazy panel construction (build widgets only on first panel visit)
 
 ---
 

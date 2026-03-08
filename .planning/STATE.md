@@ -3,19 +3,19 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-03-08T17:25:30.234Z"
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-03-08T23:08:00.000Z"
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Shadow Settings — Project State
 
 ## Current Phase
-Phase 3: Widget Factory & Panel Generation (1 of 2 plans done)
+Phase 3: Widget Factory & Panel Generation (2 of 2 plans done -- COMPLETE)
 
 ## Progress
 - [x] Project initialized
@@ -24,7 +24,7 @@ Phase 3: Widget Factory & Panel Generation (1 of 2 plans done)
 - [x] Roadmap created (5 phases)
 - [x] Phase 1: App Identity & Foundation
 - [x] Phase 2: Dynamic Detection Engine
-- [ ] Phase 3: Widget Factory & Panel Generation
+- [x] Phase 3: Widget Factory & Panel Generation
 - [ ] Phase 4: Visual Identity & Design
 - [ ] Phase 5: Search, Polish & Distribution
 
@@ -71,6 +71,7 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | 02 | 02-01 (Core Data Model & Detection) | COMPLETE | 4min | 2e945ba, abc83b8 |
 | 02 | 02-02 (Setting Registry & Dynamic Sidebar) | COMPLETE | 4min | 0debbbc, cf59d41 |
 | 03 | 03-01 (Widget Factory) | COMPLETE | 8min | a6bb87e, 9ab990d |
+| 03 | 03-02 (Panel Generation) | COMPLETE | 5min | b877e4d, 18144ad |
 
 ## Key Decisions (Phase 3)
 | Decision | Choice | Rationale |
@@ -79,10 +80,13 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | display_factor default | Treat 0.0 as 1.0 (no scaling) | Forward compatibility for future registry entries |
 | AUTO enum labels | Auto-capitalize from range data values | No manual label curation needed for dynamically discovered enum values |
 | Signal loop prevention | Compare before writing in notify handlers | COMBO/SPIN rows guard against re-entrancy without disconnect/reconnect |
+| Lazy construction tracking | HashTable<string,bool> for panels_built | Simple and efficient gate for build_category_page_with_widgets() |
+| First panel eager | Build first category page at startup | Prevents blank content area on launch (research Pitfall 6) |
+| Dead panel cleanup | Remove from meson.build, keep files on disk | Files serve as reference; full cleanup in a future pass |
 
 ## Last Session
-- **Stopped at:** Completed 03-01-PLAN.md
-- **Timestamp:** 2026-03-08T17:23:02Z
+- **Stopped at:** Completed 03-02-PLAN.md (Phase 3 complete)
+- **Timestamp:** 2026-03-08T23:08:00Z
 
 ## Next Action
-Execute Plan 03-02: Panel Generation (wire WidgetFactory into window.vala).
+Execute Phase 4: Visual Identity & Design (custom CSS, animations, app icon).
