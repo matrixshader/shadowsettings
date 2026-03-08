@@ -13,15 +13,15 @@
 
 Plans:
 - [x] 01-01-PLAN.md — Rename app from Construct to Shadow Settings, set app ID to io.github.matrixshader.ShadowSettings
-- [ ] 01-02-PLAN.md — Create SafeSettings helper and null-guard all GSettings access across panels
+- [x] 01-02-PLAN.md — Create SafeSettings helper and null-guard all GSettings access across panels
 
 **Success criteria:**
-- [ ] App ID set to `io.github.matrixshader.ShadowSettings` (or finalized alternative)
-- [ ] All files updated: meson.build, desktop file, polkit policy, icon paths, application.vala
-- [ ] Binary renamed from `construct` to `shadow-settings`
-- [ ] Every `new GLib.Settings()` call guarded with `SettingsSchemaSource.lookup()` check
-- [ ] App builds clean and launches without crashes
-- [ ] Old "Construct" branding completely removed
+- [x] App ID set to `io.github.matrixshader.ShadowSettings` (or finalized alternative)
+- [x] All files updated: meson.build, desktop file, polkit policy, icon paths, application.vala
+- [x] Binary renamed from `construct` to `shadow-settings`
+- [x] Every `new GLib.Settings()` call guarded with `SettingsSchemaSource.lookup()` check
+- [x] App builds clean and launches without crashes
+- [x] Old "Construct" branding completely removed
 
 ---
 
@@ -31,6 +31,12 @@ Plans:
 **Why second:** This IS the product. Without dynamic detection, Shadow Settings is just another Tweaks clone. The widget factory (Phase 3) depends on the detection engine's output format.
 
 **Requirements addressed:** FR-1 (Dynamic Detection), FR-2 (Known-Exposed Blocklist), FR-4 (Category Organization)
+
+**Plans:** 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Create SettingDef data model, SchemaScanner, and CategoryMapper core types
+- [ ] 02-02-PLAN.md — Populate curated registry with hidden settings, wire dynamic sidebar and settings count
 
 **Success criteria:**
 - [ ] `SchemaScanner` class that enumerates all installed GSettings schemas via `SettingsSchemaSource.list_schemas()`
