@@ -55,6 +55,12 @@ Plans:
 
 **Requirements addressed:** FR-3 (Widget Factory), FR-5 (Reset to Default + Changed Highlighting), FR-7 (Logind gating)
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Create WidgetFactory static class with all widget creators, reset-to-default, and changed-settings highlighting
+- [ ] 03-02-PLAN.md — Wire factory into window.vala with lazy panel construction, remove dead hardcoded panels
+
 **Success criteria:**
 - [ ] `WidgetFactory` that maps `SettingsSchemaKey.get_value_type()` + `get_range()` to correct Adwaita widget
 - [ ] Boolean → SwitchRow, Enum → ComboRow, Int range → SpinRow, Double → SpinRow, String → EntryRow/ComboRow
