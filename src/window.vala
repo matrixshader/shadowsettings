@@ -4,6 +4,11 @@ namespace ShadowSettings {
         private Gtk.Stack content_stack;
         private Gtk.ListBox sidebar_list;
 
+        /* Instance fields for lazy panel construction */
+        private CategoryInfo[] categories;
+        private SchemaScanner scanner;
+        private HashTable<string, bool> panels_built;
+
         public Window (Adw.Application app) {
             Object (
                 application: app,
@@ -17,6 +22,8 @@ namespace ShadowSettings {
             content_stack = new Gtk.Stack ();
             content_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
 
+            panels_built = new HashTable<string, bool> (str_hash, str_equal);
+
             // --- Build full registry from all curated setting files ---
             SettingDef[] full_registry = {};
             foreach (var def in Registry.get_desktop_settings ()) full_registry += def;
@@ -27,17 +34,18 @@ namespace ShadowSettings {
             foreach (var def in Registry.get_privacy_settings ()) full_registry += def;
 
             // --- Run SchemaScanner to filter to available settings ---
-            var scanner = new SchemaScanner ();
+            scanner = new SchemaScanner ();
             var available = scanner.scan (full_registry);
 
             // --- Run CategoryMapper to group into ordered categories ---
             var mapper = new CategoryMapper ();
-            var categories = mapper.map (available);
+            categories = mapper.map (available);
 
-            // --- Build content pages for each detected category ---
-            foreach (var cat in categories) {
-                var page = build_category_page (cat);
-                content_stack.add_named (page, cat.id);
+            // --- Build first category eagerly to avoid blank content area ---
+            if (categories.length > 0) {
+                var first_page = build_category_page_with_widgets (categories[0]);
+                content_stack.add_named (first_page, categories[0].id);
+                panels_built[categories[0].id] = true;
             }
 
             // --- Power category: special logind handling (native only) ---
@@ -77,6 +85,20 @@ namespace ShadowSettings {
                 if (row != null) {
                     var action_row = (Adw.ActionRow) row;
                     var panel_id = action_row.get_data<string> ("panel-id");
+
+                    // Lazy build: construct page on first visit
+                    if (!panels_built.contains (panel_id) && panel_id != "power") {
+                        // Find the CategoryInfo for this panel_id
+                        foreach (var cat in categories) {
+                            if (cat.id == panel_id) {
+                                var page = build_category_page_with_widgets (cat);
+                                content_stack.add_named (page, panel_id);
+                                panels_built[panel_id] = true;
+                                break;
+                            }
+                        }
+                    }
+
                     content_stack.visible_child_name = panel_id;
                     split_view.show_content = true;
                 }
@@ -126,11 +148,10 @@ namespace ShadowSettings {
         }
 
         /**
-         * Builds a placeholder PreferencesPage for a category, showing
-         * detected settings organized by group. Phase 3's widget factory
-         * will replace these with actual interactive widgets.
+         * Builds a PreferencesPage for a category using WidgetFactory to create
+         * interactive widgets for each detected setting.
          */
-        private Adw.PreferencesPage build_category_page (CategoryInfo cat) {
+        private Adw.PreferencesPage build_category_page_with_widgets (CategoryInfo cat) {
             var page = new Adw.PreferencesPage ();
             page.title = cat.title;
             page.icon_name = cat.icon;
@@ -157,12 +178,10 @@ namespace ShadowSettings {
 
                 foreach (var def in cat.settings) {
                     if (def.group == group_name) {
-                        var row = new Adw.ActionRow ();
-                        row.title = def.label;
-                        if (def.subtitle != null) {
-                            row.subtitle = def.subtitle;
+                        var widget = WidgetFactory.create_row (def, scanner);
+                        if (widget != null) {
+                            group.add (widget);
                         }
-                        group.add (row);
                     }
                 }
 
