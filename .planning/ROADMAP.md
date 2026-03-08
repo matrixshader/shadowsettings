@@ -35,16 +35,16 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Create SettingDef data model, SchemaScanner, and CategoryMapper core types
-- [ ] 02-02-PLAN.md — Populate curated registry with hidden settings, wire dynamic sidebar and settings count
+- [x] 02-01-PLAN.md — Create SettingDef data model, SchemaScanner, and CategoryMapper core types
+- [x] 02-02-PLAN.md — Populate curated registry with hidden settings, wire dynamic sidebar and settings count
 
 **Success criteria:**
-- [ ] `SchemaScanner` class that enumerates all installed GSettings schemas via `SettingsSchemaSource.list_schemas()`
-- [ ] Filter layer with "known-exposed" blocklist (settings GNOME Settings already shows)
-- [ ] Category mapper that assigns detected keys to logical panels (Power, Windows, Desktop, Appearance, Input)
-- [ ] Scanner output is a structured data model consumable by the widget factory
-- [ ] On Fedora: app shows settings that exist but aren't in GNOME Settings
-- [ ] Settings count displayed somewhere (e.g., "42 hidden settings found on your system")
+- [x] `SchemaScanner` class that enumerates all installed GSettings schemas via `SettingsSchemaSource.list_schemas()`
+- [x] Filter layer with "known-exposed" blocklist (settings GNOME Settings already shows)
+- [x] Category mapper that assigns detected keys to logical panels (Power, Windows, Desktop, Appearance, Input)
+- [x] Scanner output is a structured data model consumable by the widget factory
+- [x] On Fedora: app shows settings that exist but aren't in GNOME Settings
+- [x] Settings count displayed somewhere (e.g., "42 hidden settings found on your system")
 
 ---
 
