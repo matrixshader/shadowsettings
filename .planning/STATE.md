@@ -2,20 +2,20 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-03-08T16:31:22.163Z"
+status: in-progress
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-03-08T17:25:30.234Z"
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 4
-  completed_plans: 4
+  total_plans: 6
+  completed_plans: 5
 ---
 
 # Shadow Settings — Project State
 
 ## Current Phase
-Phase 2: Dynamic Detection Engine (2 of 2 plans done -- COMPLETE)
+Phase 3: Widget Factory & Panel Generation (1 of 2 plans done)
 
 ## Progress
 - [x] Project initialized
@@ -70,10 +70,19 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | 01 | 01-02 (SafeSettings Null-Guarding) | COMPLETE | 3min | 74f210b, d5c689b |
 | 02 | 02-01 (Core Data Model & Detection) | COMPLETE | 4min | 2e945ba, abc83b8 |
 | 02 | 02-02 (Setting Registry & Dynamic Sidebar) | COMPLETE | 4min | 0debbbc, cf59d41 |
+| 03 | 03-01 (Widget Factory) | COMPLETE | 8min | a6bb87e, 9ab990d |
+
+## Key Decisions (Phase 3)
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| EntryRow reset handler | Separate attach_reset_and_tracking_entry() | EntryRow extends PreferencesRow not ActionRow; different add_suffix() method |
+| display_factor default | Treat 0.0 as 1.0 (no scaling) | Forward compatibility for future registry entries |
+| AUTO enum labels | Auto-capitalize from range data values | No manual label curation needed for dynamically discovered enum values |
+| Signal loop prevention | Compare before writing in notify handlers | COMBO/SPIN rows guard against re-entrancy without disconnect/reconnect |
 
 ## Last Session
-- **Stopped at:** Completed 02-02-PLAN.md
-- **Timestamp:** 2026-03-08T16:25:00Z
+- **Stopped at:** Completed 03-01-PLAN.md
+- **Timestamp:** 2026-03-08T17:23:02Z
 
 ## Next Action
-Execute Phase 3: Widget Factory & Panel Generation.
+Execute Plan 03-02: Panel Generation (wire WidgetFactory into window.vala).
