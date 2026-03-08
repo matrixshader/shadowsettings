@@ -2,20 +2,20 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-stopped_at: Completed 01-02-PLAN.md (Phase 1 complete)
-last_updated: "2026-03-07T04:09:15.626Z"
+status: in-progress
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-03-08T16:19:35.041Z"
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 4
+  completed_plans: 3
 ---
 
 # Shadow Settings — Project State
 
 ## Current Phase
-Phase 1: App Identity & Foundation (COMPLETE - 2 of 2 plans done)
+Phase 2: Dynamic Detection Engine (1 of 2 plans done)
 
 ## Progress
 - [x] Project initialized
@@ -39,6 +39,8 @@ Phase 1: App Identity & Foundation (COMPLETE - 2 of 2 plans done)
 | Brand | Standalone, not Matrix Shader product | Links to Matrix Shader in About dialog, but separate project |
 | Missing schema UX | Silent skip, no empty-state UI | Phase 1 simplicity; better UX deferred to Phase 3 widget factory |
 | SafeSettings pattern | Static helper with cached SettingsSchemaSource | All GSettings access via SafeSettings.try_get(), never direct constructor |
+| CATEGORY_ORDER type | `const string[]` at namespace level | Vala allows const for plain string arrays; static rejected as non-constant initializer |
+| SchemaScanner source | Own SettingsSchemaSource instance | Separation of concerns from SafeSettings helper |
 
 ## Critical Findings from Research
 1. Every `new GLib.Settings()` in prototype will crash on missing schemas — must null-guard (Phase 1)
@@ -63,10 +65,11 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 |-------|------|--------|----------|--------|
 | 01 | 01-01 (App Identity Rename) | COMPLETE | 5min | 3a9e0b0, 7cf54a5 |
 | 01 | 01-02 (SafeSettings Null-Guarding) | COMPLETE | 3min | 74f210b, d5c689b |
+| 02 | 02-01 (Core Data Model & Detection) | COMPLETE | 4min | 2e945ba, abc83b8 |
 
 ## Last Session
-- **Stopped at:** Completed 01-02-PLAN.md (Phase 1 complete)
-- **Timestamp:** 2026-03-07T04:03:53Z
+- **Stopped at:** Completed 02-01-PLAN.md
+- **Timestamp:** 2026-03-08T04:57:00Z
 
 ## Next Action
-Execute Phase 2: Dynamic Detection Engine.
+Execute Plan 02-02: Setting Registry (remaining plan in Phase 2).
