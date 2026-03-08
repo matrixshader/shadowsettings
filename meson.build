@@ -27,10 +27,6 @@ sources = files(
   'src/registry/power.vala',
   'src/registry/privacy.vala',
   'src/panels/power.vala',
-  'src/panels/windows.vala',
-  'src/panels/desktop.vala',
-  'src/panels/appearance.vala',
-  'src/panels/input.vala',
   'src/helpers/logind-helper.vala',
   'src/helpers/safe-settings.vala',
 )
