@@ -36,7 +36,7 @@ namespace ShadowSettings {
         public SettingDef[] settings;
     }
 
-    public static string[] CATEGORY_ORDER = {
+    public const string[] CATEGORY_ORDER = {
         "desktop", "appearance", "windows", "input", "power", "privacy"
     };
 }
