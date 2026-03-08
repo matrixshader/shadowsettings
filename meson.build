@@ -19,6 +19,7 @@ sources = files(
   'src/core/setting-def.vala',
   'src/core/schema-scanner.vala',
   'src/core/category-mapper.vala',
+  'src/core/widget-factory.vala',
   'src/registry/desktop.vala',
   'src/registry/appearance.vala',
   'src/registry/windows.vala',
