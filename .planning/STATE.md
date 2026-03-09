@@ -3,19 +3,19 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Phase 4 context gathered
-last_updated: "2026-03-09T00:08:15.593Z"
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-09T01:06:31.050Z"
 progress:
   total_phases: 5
   completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 8
+  completed_plans: 7
 ---
 
 # Shadow Settings — Project State
 
 ## Current Phase
-Phase 3: Widget Factory & Panel Generation (2 of 2 plans done -- COMPLETE)
+Phase 4: Visual Identity & Design (1 of 2 plans done)
 
 ## Progress
 - [x] Project initialized
@@ -72,6 +72,7 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | 02 | 02-02 (Setting Registry & Dynamic Sidebar) | COMPLETE | 4min | 0debbbc, cf59d41 |
 | 03 | 03-01 (Widget Factory) | COMPLETE | 8min | a6bb87e, 9ab990d |
 | 03 | 03-02 (Panel Generation) | COMPLETE | 5min | b877e4d, 18144ad |
+| 04 | 04-01 (Theme Infrastructure) | COMPLETE | 5min | 063f095, 7417647 |
 
 ## Key Decisions (Phase 3)
 | Decision | Choice | Rationale |
@@ -84,9 +85,17 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | First panel eager | Build first category page at startup | Prevents blank content area on launch (research Pitfall 6) |
 | Dead panel cleanup | Remove from meson.build, keep files on disk | Files serve as reference; full cleanup in a future pass |
 
+## Key Decisions (Phase 4)
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| CSS class switching for themes | window.gotham-night/gotham-day/wayne-manor classes | 3 themes need more than dark/light toggle; CSS classes + StyleManager color scheme |
+| GSettings direct read in construct | SafeSettings.try_get() in build_preferences_page() | ThemeManager doesn't exist during Window construct; read directly from GSettings |
+| Preferences as content_stack page | Full PreferencesPage in same stack | Consistent with lazy-loading architecture; no special-case routing |
+| Owned getter for current_theme | Vala `owned get` property | GSettings.get_string() returns owned string; Vala ownership rules require explicit transfer |
+
 ## Last Session
-- **Stopped at:** Phase 4 context gathered
-- **Timestamp:** 2026-03-08T23:08:00Z
+- **Stopped at:** Completed 04-01-PLAN.md
+- **Timestamp:** 2026-03-09T01:05:00Z
 
 ## Next Action
-Execute Phase 4: Visual Identity & Design (custom CSS, animations, app icon).
+Execute Phase 4 Plan 02: Animations, About dialog, app icon.
