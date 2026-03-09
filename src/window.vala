@@ -67,18 +67,13 @@ namespace ShadowSettings {
             sidebar_list.selection_mode = Gtk.SelectionMode.SINGLE;
             sidebar_list.add_css_class ("navigation-sidebar");
 
-            // Preferences row -- first item in sidebar
+            // App preferences row -- first item in sidebar, gear icon only
             var prefs_row = new Adw.ActionRow ();
-            prefs_row.title = "Preferences";
             prefs_row.add_prefix (new Gtk.Image.from_icon_name ("applications-system-symbolic"));
             prefs_row.activatable = true;
+            prefs_row.add_css_class ("prefs-row");
             prefs_row.set_data<string> ("panel-id", "preferences");
             sidebar_list.append (prefs_row);
-
-            // Art Deco separator between Preferences and category rows
-            var separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
-            separator.add_css_class ("preferences-separator");
-            sidebar_list.append (separator);
 
             foreach (var cat in categories) {
                 var row = new Adw.ActionRow ();
@@ -182,8 +177,8 @@ namespace ShadowSettings {
 
             this.content = split_view;
 
-            // Select first category row (skip preferences + separator = index 2)
-            sidebar_list.select_row (sidebar_list.get_row_at_index (2));
+            // Select first category row (skip preferences row = index 1)
+            sidebar_list.select_row (sidebar_list.get_row_at_index (1));
         }
 
         /**

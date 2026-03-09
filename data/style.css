@@ -204,13 +204,13 @@ row.setting-modified {
 
 
 /* ============================================================
- * PREFERENCES SEPARATOR -- Art Deco divider in sidebar
+ * PREFERENCES ROW -- gear-only row with bottom accent divider
  * ============================================================ */
 
-.preferences-separator {
-    margin: 4px 12px;
-    background-color: alpha(var(--accent-bg-color), 0.25);
-    min-height: 1px;
+.navigation-sidebar row.prefs-row {
+    border-bottom: 1px solid alpha(var(--accent-bg-color), 0.25);
+    margin-bottom: 4px;
+    padding-bottom: 4px;
 }
 
 
