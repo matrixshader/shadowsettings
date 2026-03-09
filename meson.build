@@ -62,6 +62,11 @@ install_data(
 )
 
 install_data(
+  'data/icons/hicolor/scalable/apps/io.github.matrixshader.ShadowSettings-symbolic.svg',
+  install_dir: get_option('datadir') / 'icons/hicolor/scalable/apps',
+)
+
+install_data(
   'polkit/io.github.matrixshader.ShadowSettings.policy',
   install_dir: get_option('datadir') / 'polkit-1/actions',
 )

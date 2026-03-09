@@ -158,6 +158,15 @@ namespace ShadowSettings {
             // --- Content page ---
             var content_header = new Adw.HeaderBar ();
 
+            // Menu button with About action
+            var menu = new GLib.Menu ();
+            menu.append ("About Shadow Settings", "app.about");
+            var menu_button = new Gtk.MenuButton ();
+            menu_button.icon_name = "open-menu-symbolic";
+            menu_button.menu_model = menu;
+            menu_button.primary = true;
+            content_header.pack_end (menu_button);
+
             var content_page = new Adw.ToolbarView ();
             content_page.add_top_bar (content_header);
             content_page.content = content_stack;

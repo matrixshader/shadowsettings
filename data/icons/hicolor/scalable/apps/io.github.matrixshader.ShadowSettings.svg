@@ -1,31 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
   <!-- Background circle -->
-  <circle cx="64" cy="64" r="60" fill="#1a1a2e"/>
-  <circle cx="64" cy="64" r="56" fill="none" stroke="#00ff41" stroke-width="1.5" opacity="0.6"/>
-  <!-- Matrix-style gear/settings icon -->
+  <circle cx="64" cy="64" r="62" fill="#0A0A0F"/>
+  <circle cx="64" cy="64" r="58" fill="none" stroke="#C8962E" stroke-width="2" opacity="0.5"/>
+
+  <!-- Art Deco shield / gear shape -->
   <g transform="translate(64,64)">
-    <!-- Outer gear teeth -->
-    <g fill="#00ff41" opacity="0.9">
-      <rect x="-4" y="-40" width="8" height="12" rx="2"/>
-      <rect x="-4" y="28" width="8" height="12" rx="2"/>
-      <rect x="-40" y="-4" width="12" height="8" rx="2"/>
-      <rect x="28" y="-4" width="12" height="8" rx="2"/>
-      <rect x="22" y="-30" width="8" height="12" rx="2" transform="rotate(45)"/>
-      <rect x="-30" y="22" width="8" height="12" rx="2" transform="rotate(45)"/>
-      <rect x="22" y="22" width="8" height="12" rx="2" transform="rotate(-45)"/>
-      <rect x="-30" y="-30" width="8" height="12" rx="2" transform="rotate(-45)"/>
+    <!-- Outer Art Deco octagonal frame -->
+    <polygon points="0,-44 31,-31 44,0 31,31 0,44 -31,31 -44,0 -31,-31"
+             fill="none" stroke="#C8962E" stroke-width="2.5" opacity="0.85"/>
+
+    <!-- Inner Art Deco octagonal frame -->
+    <polygon points="0,-32 22.6,-22.6 32,0 22.6,22.6 0,32 -22.6,22.6 -32,0 -22.6,-22.6"
+             fill="rgba(200,150,46,0.08)" stroke="#C8962E" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- Art Deco radial lines (8 directions) -->
+    <g stroke="#C8962E" stroke-width="1" opacity="0.4">
+      <line x1="0" y1="-32" x2="0" y2="-44"/>
+      <line x1="22.6" y1="-22.6" x2="31" y2="-31"/>
+      <line x1="32" y1="0" x2="44" y2="0"/>
+      <line x1="22.6" y1="22.6" x2="31" y2="31"/>
+      <line x1="0" y1="32" x2="0" y2="44"/>
+      <line x1="-22.6" y1="22.6" x2="-31" y2="31"/>
+      <line x1="-32" y1="0" x2="-44" y2="0"/>
+      <line x1="-22.6" y1="-22.6" x2="-31" y2="-31"/>
     </g>
-    <!-- Outer ring -->
-    <circle r="28" fill="none" stroke="#00ff41" stroke-width="3" opacity="0.8"/>
+
+    <!-- Central gear/cog shape -- settings motif -->
+    <!-- Outer gear teeth (4 cardinal + 4 diagonal) -->
+    <g fill="#C8962E" opacity="0.9">
+      <rect x="-3" y="-24" width="6" height="8" rx="1.5"/>
+      <rect x="-3" y="16" width="6" height="8" rx="1.5"/>
+      <rect x="-24" y="-3" width="8" height="6" rx="1.5"/>
+      <rect x="16" y="-3" width="8" height="6" rx="1.5"/>
+      <rect x="11" y="-19" width="6" height="8" rx="1.5" transform="rotate(45)"/>
+      <rect x="-19" y="11" width="6" height="8" rx="1.5" transform="rotate(45)"/>
+      <rect x="11" y="11" width="6" height="8" rx="1.5" transform="rotate(-45)"/>
+      <rect x="-19" y="-19" width="6" height="8" rx="1.5" transform="rotate(-45)"/>
+    </g>
+
+    <!-- Gear ring -->
+    <circle r="16" fill="none" stroke="#C8962E" stroke-width="2.5" opacity="0.9"/>
+
     <!-- Inner ring -->
-    <circle r="14" fill="none" stroke="#00ff41" stroke-width="2.5"/>
-    <!-- Center dot -->
-    <circle r="5" fill="#00ff41"/>
-    <!-- Digital rain hint -->
-    <text x="-18" y="-44" fill="#00ff41" font-family="monospace" font-size="8" opacity="0.4">01</text>
-    <text x="12" y="-44" fill="#00ff41" font-family="monospace" font-size="8" opacity="0.3">10</text>
-    <text x="-18" y="50" fill="#00ff41" font-family="monospace" font-size="8" opacity="0.3">11</text>
-    <text x="12" y="50" fill="#00ff41" font-family="monospace" font-size="8" opacity="0.4">00</text>
+    <circle r="8" fill="none" stroke="#C8962E" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- Center dot - amber glow -->
+    <circle r="4" fill="#C8962E" opacity="0.95"/>
+    <circle r="2" fill="#D4A843"/>
+
+    <!-- Art Deco corner accents (sunburst hints) -->
+    <g stroke="#C8962E" stroke-width="0.8" opacity="0.3">
+      <line x1="-38" y1="-38" x2="-46" y2="-46"/>
+      <line x1="38" y1="-38" x2="46" y2="-46"/>
+      <line x1="-38" y1="38" x2="-46" y2="46"/>
+      <line x1="38" y1="38" x2="46" y2="46"/>
+    </g>
   </g>
+
+  <!-- Outer decorative ring -->
+  <circle cx="64" cy="64" r="54" fill="none" stroke="#C8962E" stroke-width="0.5" opacity="0.25"
+          stroke-dasharray="4,4"/>
 </svg>
