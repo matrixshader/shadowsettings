@@ -12,6 +12,18 @@ deps = [
   dependency('glib-2.0'),
 ]
 
+# Compile CSS stylesheets into GResource binary
+gresource = gnome.compile_resources(
+  'shadow-settings-resources',
+  'data/io.github.matrixshader.ShadowSettings.gresource.xml',
+  source_dir: 'data',
+)
+
+# Compile GSettings schema for dev builds (sets GSETTINGS_SCHEMA_DIR)
+gnome.compile_schemas(
+  depend_files: 'data/io.github.matrixshader.ShadowSettings.gschema.xml',
+)
+
 sources = files(
   'src/main.vala',
   'src/application.vala',
@@ -20,6 +32,7 @@ sources = files(
   'src/core/schema-scanner.vala',
   'src/core/category-mapper.vala',
   'src/core/widget-factory.vala',
+  'src/core/theme-manager.vala',
   'src/registry/desktop.vala',
   'src/registry/appearance.vala',
   'src/registry/windows.vala',
@@ -32,7 +45,7 @@ sources = files(
 )
 
 executable('shadow-settings',
-  sources,
+  sources, gresource,
   dependencies: deps,
   install: true,
 )
@@ -51,3 +64,10 @@ install_data(
   'polkit/io.github.matrixshader.ShadowSettings.policy',
   install_dir: get_option('datadir') / 'polkit-1/actions',
 )
+
+install_data(
+  'data/io.github.matrixshader.ShadowSettings.gschema.xml',
+  install_dir: get_option('datadir') / 'glib-2.0' / 'schemas',
+)
+
+gnome.post_install(glib_compile_schemas: true)

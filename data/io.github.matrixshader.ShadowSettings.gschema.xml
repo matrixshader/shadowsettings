@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="io.github.matrixshader.ShadowSettings"
+          path="/io/github/matrixshader/ShadowSettings/"
+          gettext-domain="shadow-settings">
+    <key name="theme" type="s">
+      <default>'auto'</default>
+      <summary>Visual theme</summary>
+      <description>Visual theme: auto, gotham-night, gotham-day, wayne-manor</description>
+    </key>
+    <key name="reduce-motion" type="b">
+      <default>false</default>
+      <summary>Reduce motion</summary>
+      <description>Disable animations within the app</description>
+    </key>
+  </schema>
+</schemalist>

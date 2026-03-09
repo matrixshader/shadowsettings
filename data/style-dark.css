@@ -1,0 +1,18 @@
+/* ============================================================
+ * Shadow Settings -- Dark Mode Overrides
+ *
+ * Loaded ONLY in dark mode (stacks on top of style.css).
+ * Most dark handling is via CSS class selectors (gotham-night,
+ * wayne-manor) in style.css. This file handles any additional
+ * dark-mode-specific adjustments.
+ * ============================================================ */
+
+/* Slightly boost scanline visibility in dark mode */
+preferencesgroup > box > .header {
+    border-bottom-color: alpha(var(--accent-bg-color), 0.35);
+}
+
+/* Strengthen card borders in dark for depth */
+preferencesgroup > box > list > row {
+    border: 1px solid alpha(var(--accent-bg-color), 0.05);
+}

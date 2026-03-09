@@ -1,0 +1,226 @@
+/* ============================================================
+ * Shadow Settings -- Base Stylesheet
+ * Art Deco / Batcomputer Aesthetic
+ *
+ * Loaded in ALL color modes (light, dark, HC).
+ * Theme-specific palettes via CSS class selectors on window.
+ * Uses libadwaita CSS variable overrides -- NOT hardcoded hex.
+ * ============================================================ */
+
+
+/* ============================================================
+ * THEME PALETTES
+ * ============================================================ */
+
+/* Gotham Night (dark) -- deep blacks, amber/gold accents, warm parchment text */
+window.gotham-night {
+    --window-bg-color: #0A0A0F;
+    --window-fg-color: #D4C5A0;
+    --view-bg-color: #0E0E14;
+    --view-fg-color: #D4C5A0;
+    --headerbar-bg-color: #12121A;
+    --headerbar-fg-color: #D4C5A0;
+    --headerbar-border-color: rgba(200, 150, 46, 0.15);
+    --sidebar-bg-color: #0E0E16;
+    --sidebar-fg-color: #D4C5A0;
+    --accent-bg-color: #C8962E;
+    --accent-fg-color: #000000;
+    --accent-color: #D4A843;
+    --card-bg-color: rgba(200, 150, 46, 0.06);
+    --card-fg-color: #D4C5A0;
+    --destructive-bg-color: #A02020;
+    --destructive-fg-color: #ffffff;
+    --popover-bg-color: #14141C;
+    --popover-fg-color: #D4C5A0;
+    --dialog-bg-color: #12121A;
+    --dialog-fg-color: #D4C5A0;
+    --thumbnail-bg-color: #0A0A0F;
+    --shade-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Gotham Day (light) -- warm grays, muted gold accents, dark text */
+window.gotham-day {
+    --window-bg-color: #F0EDE6;
+    --window-fg-color: #2A2520;
+    --view-bg-color: #F5F2EB;
+    --view-fg-color: #2A2520;
+    --headerbar-bg-color: #E8E4DB;
+    --headerbar-fg-color: #2A2520;
+    --headerbar-border-color: rgba(154, 117, 32, 0.2);
+    --sidebar-bg-color: #E0DCD3;
+    --sidebar-fg-color: #2A2520;
+    --accent-bg-color: #9A7520;
+    --accent-fg-color: #ffffff;
+    --accent-color: #7A5C18;
+    --card-bg-color: rgba(154, 117, 32, 0.06);
+    --card-fg-color: #2A2520;
+    --destructive-bg-color: #B02020;
+    --destructive-fg-color: #ffffff;
+    --popover-bg-color: #EBE8E0;
+    --popover-fg-color: #2A2520;
+    --dialog-bg-color: #F0EDE6;
+    --dialog-fg-color: #2A2520;
+    --shade-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Wayne Manor (warm dark) -- deep browns, warm amber, rich premium feel */
+window.wayne-manor {
+    --window-bg-color: #1A1410;
+    --window-fg-color: #D8C8A8;
+    --view-bg-color: #1E1812;
+    --view-fg-color: #D8C8A8;
+    --headerbar-bg-color: #221C14;
+    --headerbar-fg-color: #D8C8A8;
+    --headerbar-border-color: rgba(200, 154, 62, 0.15);
+    --sidebar-bg-color: #1C1610;
+    --sidebar-fg-color: #D8C8A8;
+    --accent-bg-color: #C89A3E;
+    --accent-fg-color: #1A1008;
+    --accent-color: #D4A84A;
+    --card-bg-color: rgba(200, 154, 62, 0.08);
+    --card-fg-color: #D8C8A8;
+    --destructive-bg-color: #A83020;
+    --destructive-fg-color: #ffffff;
+    --popover-bg-color: #201A14;
+    --popover-fg-color: #D8C8A8;
+    --dialog-bg-color: #221C14;
+    --dialog-fg-color: #D8C8A8;
+    --shade-color: rgba(0, 0, 0, 0.6);
+}
+
+
+/* ============================================================
+ * SCANLINE TEXTURE -- Batcomputer CRT effect
+ * Very subtle repeating horizontal lines on the window bg
+ * ============================================================ */
+
+window.gotham-night,
+window.wayne-manor {
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.06) 2px,
+        rgba(0, 0, 0, 0.06) 4px
+    );
+}
+
+window.gotham-day {
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.02) 2px,
+        rgba(0, 0, 0, 0.02) 4px
+    );
+}
+
+
+/* ============================================================
+ * ART DECO GROUP HEADERS -- monospace, uppercase, letter-spaced
+ * Batcomputer terminal feel
+ * ============================================================ */
+
+preferencesgroup > box > .header > .title {
+    font-family: monospace;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    color: var(--accent-bg-color);
+}
+
+preferencesgroup > box > .header > .subtitle {
+    font-family: monospace;
+    font-size: 0.75em;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+
+/* ============================================================
+ * ART DECO DIVIDERS -- bold accent border on group headers
+ * ============================================================ */
+
+preferencesgroup > box > .header {
+    border-bottom: 2px solid alpha(var(--accent-bg-color), 0.4);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+}
+
+
+/* ============================================================
+ * SIDEBAR PINSTRIPE -- subtle accent gradient border
+ * ============================================================ */
+
+navigationsplitview > .sidebar-pane {
+    border-right: 1px solid alpha(var(--accent-bg-color), 0.2);
+}
+
+
+/* ============================================================
+ * SIDEBAR ROWS -- refined Batcomputer list entries
+ * ============================================================ */
+
+.navigation-sidebar row:selected {
+    background-color: alpha(var(--accent-bg-color), 0.15);
+}
+
+.navigation-sidebar row:hover:not(:selected) {
+    background-color: alpha(var(--accent-bg-color), 0.06);
+}
+
+
+/* ============================================================
+ * PREFERENCE ROWS -- card-like backgrounds
+ * ============================================================ */
+
+preferencesgroup > box > list > row {
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    margin: 2px 0;
+}
+
+
+/* ============================================================
+ * SETTING-MODIFIED INDICATOR
+ * Persistent inset left amber border (no animation yet -- Plan 02)
+ * ============================================================ */
+
+row.setting-modified {
+    box-shadow: inset 3px 0 0 0 alpha(var(--accent-bg-color), 0.7);
+}
+
+
+/* ============================================================
+ * HUD-STYLE CATEGORY HEADERS (sidebar window title)
+ * ============================================================ */
+
+.navigation-sidebar headerbar .title {
+    font-family: monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+/* ============================================================
+ * PREFERENCES SEPARATOR -- Art Deco divider in sidebar
+ * ============================================================ */
+
+.preferences-separator {
+    margin: 4px 12px;
+    background-color: alpha(var(--accent-bg-color), 0.25);
+    min-height: 1px;
+}
+
+
+/* ============================================================
+ * REDUCE MOTION -- kill animations when toggled
+ * ============================================================ */
+
+window.reduce-motion *,
+window.reduce-motion row.setting-modified {
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0ms !important;
+}

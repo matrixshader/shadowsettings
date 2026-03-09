@@ -1,0 +1,35 @@
+/* ============================================================
+ * Shadow Settings -- High Contrast + Dark Overrides
+ *
+ * Loaded in high contrast dark mode. Combines HC and dark
+ * adjustments. Ensures modified-setting indicators and all
+ * UI elements are clearly visible against dark backgrounds.
+ * ============================================================ */
+
+/* Boost card borders for dark HC: bright accent outline */
+preferencesgroup > box > list > row {
+    border: 2px solid alpha(var(--accent-bg-color), 0.4);
+}
+
+/* Art Deco dividers: full brightness in dark HC */
+preferencesgroup > box > .header {
+    border-bottom: 3px solid var(--accent-bg-color);
+}
+
+/* Modified indicator: bright and thick */
+row.setting-modified {
+    box-shadow: inset 5px 0 0 0 var(--accent-bg-color);
+}
+
+/* Sidebar selection: strong contrast */
+.navigation-sidebar row:selected {
+    background-color: alpha(var(--accent-bg-color), 0.3);
+    border: 2px solid var(--accent-bg-color);
+}
+
+/* Remove subtle textures */
+window.gotham-night,
+window.gotham-day,
+window.wayne-manor {
+    background-image: none;
+}

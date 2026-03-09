@@ -1,0 +1,55 @@
+/* ============================================================
+ * Shadow Settings -- High Contrast Overrides
+ *
+ * Loaded in high contrast mode. Ensures WCAG AAA compliance.
+ * Thickens borders, increases accent opacity, overrides any
+ * subtle effects that reduce readability.
+ * ============================================================ */
+
+/* Strengthen Art Deco dividers for visibility */
+preferencesgroup > box > .header {
+    border-bottom: 3px solid var(--accent-bg-color);
+    padding-bottom: 10px;
+}
+
+/* Group headers: full opacity, stronger weight */
+preferencesgroup > box > .header > .title {
+    opacity: 1.0;
+    font-weight: 900;
+    color: var(--accent-bg-color);
+}
+
+/* Sidebar pinstripe: thicker, more visible */
+navigationsplitview > .sidebar-pane {
+    border-right: 2px solid var(--accent-bg-color);
+}
+
+/* Preference rows: visible card borders */
+preferencesgroup > box > list > row {
+    border: 2px solid alpha(var(--accent-bg-color), 0.3);
+    border-radius: 8px;
+}
+
+/* Modified setting indicator: thicker, full opacity */
+row.setting-modified {
+    box-shadow: inset 4px 0 0 0 var(--accent-bg-color);
+}
+
+/* Ensure sidebar selected row is clearly visible */
+.navigation-sidebar row:selected {
+    background-color: alpha(var(--accent-bg-color), 0.25);
+    border: 1px solid var(--accent-bg-color);
+}
+
+/* Remove scanline texture in HC mode -- reduces clarity */
+window.gotham-night,
+window.gotham-day,
+window.wayne-manor {
+    background-image: none;
+}
+
+/* Preferences separator: thicker */
+.preferences-separator {
+    min-height: 2px;
+    background-color: var(--accent-bg-color);
+}
