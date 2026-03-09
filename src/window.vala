@@ -124,6 +124,14 @@ namespace ShadowSettings {
 
                 content_stack.visible_child_name = panel_id;
                 split_view.show_content = true;
+
+                // Cascade row entrance animation on every panel switch (skip preferences)
+                if (panel_id != "preferences") {
+                    var visible = content_stack.visible_child as Adw.PreferencesPage;
+                    if (visible != null) {
+                        Animator.cascade_rows (visible);
+                    }
+                }
             });
 
             // --- Sidebar page with settings count ---

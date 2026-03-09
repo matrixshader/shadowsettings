@@ -33,6 +33,7 @@ sources = files(
   'src/core/category-mapper.vala',
   'src/core/widget-factory.vala',
   'src/core/theme-manager.vala',
+  'src/core/animator.vala',
   'src/registry/desktop.vala',
   'src/registry/appearance.vala',
   'src/registry/windows.vala',
