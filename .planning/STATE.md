@@ -3,19 +3,19 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: "04-02 Task 3 checkpoint:human-verify (Tasks 1-2 complete)"
-last_updated: "2026-03-09T01:12:00Z"
+stopped_at: Completed 04-02-PLAN.md (Phase 4 complete)
+last_updated: "2026-03-09T13:56:00.874Z"
 progress:
   total_phases: 5
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Shadow Settings — Project State
 
 ## Current Phase
-Phase 4: Visual Identity & Design (1 of 2 plans done)
+Phase 5: Search, Polish & Distribution (0 of 2 plans done)
 
 ## Progress
 - [x] Project initialized
@@ -25,7 +25,7 @@ Phase 4: Visual Identity & Design (1 of 2 plans done)
 - [x] Phase 1: App Identity & Foundation
 - [x] Phase 2: Dynamic Detection Engine
 - [x] Phase 3: Widget Factory & Panel Generation
-- [ ] Phase 4: Visual Identity & Design
+- [x] Phase 4: Visual Identity & Design
 - [ ] Phase 5: Search, Polish & Distribution
 
 ## Key Decisions
@@ -73,6 +73,7 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | 03 | 03-01 (Widget Factory) | COMPLETE | 8min | a6bb87e, 9ab990d |
 | 03 | 03-02 (Panel Generation) | COMPLETE | 5min | b877e4d, 18144ad |
 | 04 | 04-01 (Theme Infrastructure) | COMPLETE | 5min | 063f095, 7417647 |
+| 04 | 04-02 (Animations, About & Icon) | COMPLETE | 5min | a2fe7d2, 7dcf25c, d4632d1 |
 
 ## Key Decisions (Phase 3)
 | Decision | Choice | Rationale |
@@ -92,10 +93,12 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | GSettings direct read in construct | SafeSettings.try_get() in build_preferences_page() | ThemeManager doesn't exist during Window construct; read directly from GSettings |
 | Preferences as content_stack page | Full PreferencesPage in same stack | Consistent with lazy-loading architecture; no special-case routing |
 | Owned getter for current_theme | Vala `owned get` property | GSettings.get_string() returns owned string; Vala ownership rules require explicit transfer |
+| AdwAboutWindow for About dialog | AdwAboutWindow (not AdwAboutDialog) | Available since libadwaita 1.2, ensuring GNOME 43+ compatibility per NFR-4 |
+| Gear icon only for prefs | No label, just gear icon in sidebar | Cleaner sidebar that doesn't compete with category names |
 
 ## Last Session
-- **Stopped at:** 04-02 Task 3 checkpoint:human-verify (Tasks 1-2 complete)
-- **Timestamp:** 2026-03-09T01:12:00Z
+- **Stopped at:** Completed 04-02-PLAN.md (Phase 4 complete)
+- **Timestamp:** 2026-03-09T13:54:00Z
 
 ## Next Action
-Awaiting human verification of visual identity (04-02 Task 3 checkpoint). User needs to launch app and verify animations, About dialog, icons, and themes.
+Phase 5: Search, Polish & Distribution. Plan 05-01 is next.

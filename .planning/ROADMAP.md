@@ -80,21 +80,21 @@ Plans:
 
 **Requirements addressed:** NFR-1 (Visual Identity), FR-8 (About Dialog & Branding)
 
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 04-01-PLAN.md -- Theme infrastructure: GResource CSS, three Art Deco themes, ThemeManager, preferences sidebar panel
-- [ ] 04-02-PLAN.md -- Animations (row cascade, glow pulse, spring reveal), About dialog (FR-8), Art Deco app icon
+- [x] 04-01-PLAN.md -- Theme infrastructure: GResource CSS, three Art Deco themes, ThemeManager, preferences sidebar panel
+- [x] 04-02-PLAN.md -- Animations (row cascade, glow pulse, spring reveal), About dialog (FR-8), Art Deco app icon
 
 **Success criteria:**
-- [ ] Custom CSS stylesheet loaded via GResource at APPLICATION priority
-- [ ] Distinctive visual identity — not stock Adwaita toggle lists
-- [ ] Light mode, dark mode, and high contrast all work correctly
-- [ ] CSS uses libadwaita variables for theme-adaptive colors
-- [ ] Panel transitions with AdwTimedAnimation or spring animations
-- [ ] About dialog with Matrix Shader branding, tip jar link, matrixshader.com link
-- [ ] App icon (SVG) that reflects Shadow Settings identity
-- [ ] Visually distinguishable from GNOME Settings/Tweaks/Refine in a screenshot
+- [x] Custom CSS stylesheet loaded via GResource at APPLICATION priority
+- [x] Distinctive visual identity — not stock Adwaita toggle lists
+- [x] Light mode, dark mode, and high contrast all work correctly
+- [x] CSS uses libadwaita variables for theme-adaptive colors
+- [x] Panel transitions with AdwTimedAnimation or spring animations
+- [x] About dialog with Matrix Shader branding, tip jar link, matrixshader.com link
+- [x] App icon (SVG) that reflects Shadow Settings identity
+- [x] Visually distinguishable from GNOME Settings/Tweaks/Refine in a screenshot
 
 ---
 
