@@ -80,6 +80,12 @@ Plans:
 
 **Requirements addressed:** NFR-1 (Visual Identity), FR-8 (About Dialog & Branding)
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 04-01-PLAN.md -- Theme infrastructure: GResource CSS, three Art Deco themes, ThemeManager, preferences sidebar panel
+- [ ] 04-02-PLAN.md -- Animations (row cascade, glow pulse, spring reveal), About dialog (FR-8), Art Deco app icon
+
 **Success criteria:**
 - [ ] Custom CSS stylesheet loaded via GResource at APPLICATION priority
 - [ ] Distinctive visual identity — not stock Adwaita toggle lists
