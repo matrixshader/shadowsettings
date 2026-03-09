@@ -220,7 +220,7 @@ row.setting-modified {
 
 window.reduce-motion *,
 window.reduce-motion row.setting-modified {
-    animation-duration: 0ms !important;
-    animation-delay: 0ms !important;
-    transition-duration: 0ms !important;
+    animation-duration: 0ms;
+    animation-delay: 0ms;
+    transition-duration: 0ms;
 }

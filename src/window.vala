@@ -41,6 +41,11 @@ namespace ShadowSettings {
             var mapper = new CategoryMapper ();
             categories = mapper.map (available);
 
+            // --- Build preferences panel eagerly ---
+            var prefs_page = build_preferences_page ();
+            content_stack.add_named (prefs_page, "preferences");
+            panels_built["preferences"] = true;
+
             // --- Build first category eagerly to avoid blank content area ---
             if (categories.length > 0) {
                 var first_page = build_category_page_with_widgets (categories[0]);
@@ -62,6 +67,19 @@ namespace ShadowSettings {
             sidebar_list.selection_mode = Gtk.SelectionMode.SINGLE;
             sidebar_list.add_css_class ("navigation-sidebar");
 
+            // Preferences row -- first item in sidebar
+            var prefs_row = new Adw.ActionRow ();
+            prefs_row.title = "Preferences";
+            prefs_row.add_prefix (new Gtk.Image.from_icon_name ("applications-system-symbolic"));
+            prefs_row.activatable = true;
+            prefs_row.set_data<string> ("panel-id", "preferences");
+            sidebar_list.append (prefs_row);
+
+            // Art Deco separator between Preferences and category rows
+            var separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
+            separator.add_css_class ("preferences-separator");
+            sidebar_list.append (separator);
+
             foreach (var cat in categories) {
                 var row = new Adw.ActionRow ();
                 row.title = cat.title;
@@ -82,26 +100,30 @@ namespace ShadowSettings {
             }
 
             sidebar_list.row_selected.connect ((row) => {
-                if (row != null) {
-                    var action_row = (Adw.ActionRow) row;
-                    var panel_id = action_row.get_data<string> ("panel-id");
+                if (row == null) return;
 
-                    // Lazy build: construct page on first visit
-                    if (!panels_built.contains (panel_id) && panel_id != "power") {
-                        // Find the CategoryInfo for this panel_id
-                        foreach (var cat in categories) {
-                            if (cat.id == panel_id) {
-                                var page = build_category_page_with_widgets (cat);
-                                content_stack.add_named (page, panel_id);
-                                panels_built[panel_id] = true;
-                                break;
-                            }
+                // Skip separator rows (they are not ActionRows)
+                if (!(row is Adw.ActionRow)) return;
+
+                var action_row = (Adw.ActionRow) row;
+                var panel_id = action_row.get_data<string> ("panel-id");
+                if (panel_id == null) return;
+
+                // Lazy build: construct page on first visit
+                if (!panels_built.contains (panel_id) && panel_id != "power" && panel_id != "preferences") {
+                    // Find the CategoryInfo for this panel_id
+                    foreach (var cat in categories) {
+                        if (cat.id == panel_id) {
+                            var page = build_category_page_with_widgets (cat);
+                            content_stack.add_named (page, panel_id);
+                            panels_built[panel_id] = true;
+                            break;
                         }
                     }
-
-                    content_stack.visible_child_name = panel_id;
-                    split_view.show_content = true;
                 }
+
+                content_stack.visible_child_name = panel_id;
+                split_view.show_content = true;
             });
 
             // --- Sidebar page with settings count ---
@@ -143,8 +165,85 @@ namespace ShadowSettings {
 
             this.content = split_view;
 
-            // Select first category row
-            sidebar_list.select_row (sidebar_list.get_row_at_index (0));
+            // Select first category row (skip preferences + separator = index 2)
+            sidebar_list.select_row (sidebar_list.get_row_at_index (2));
+        }
+
+        /**
+         * Builds the Preferences page with theme picker and animation toggle.
+         */
+        private Adw.PreferencesPage build_preferences_page () {
+            var page = new Adw.PreferencesPage ();
+            page.title = "Preferences";
+            page.icon_name = "applications-system-symbolic";
+
+            // --- Appearance group ---
+            var appearance_group = new Adw.PreferencesGroup ();
+            appearance_group.title = "Appearance";
+            appearance_group.description = "Visual theme and motion settings";
+
+            // Theme picker: ComboRow with 4 options
+            var theme_combo = new Adw.ComboRow ();
+            theme_combo.title = "Theme";
+            theme_combo.subtitle = "Visual color scheme";
+
+            var theme_model = new Gtk.StringList (null);
+            theme_model.append ("Auto");
+            theme_model.append ("Gotham Night");
+            theme_model.append ("Gotham Day");
+            theme_model.append ("Wayne Manor");
+            theme_combo.model = theme_model;
+
+            // Theme values mapped by position
+            string[] theme_values = { "auto", "gotham-night", "gotham-day", "wayne-manor" };
+
+            // Read persisted theme directly from GSettings (ThemeManager may not exist yet)
+            var prefs_settings = SafeSettings.try_get ("io.github.matrixshader.ShadowSettings");
+            if (prefs_settings != null) {
+                var persisted = prefs_settings.get_string ("theme");
+                for (int i = 0; i < theme_values.length; i++) {
+                    if (theme_values[i] == persisted) {
+                        theme_combo.selected = i;
+                        break;
+                    }
+                }
+            }
+
+            // Wire combo to ThemeManager (connect after setting initial value to avoid spurious signal)
+            theme_combo.notify["selected"].connect (() => {
+                var idx = theme_combo.selected;
+                if (idx < theme_values.length) {
+                    var app = (ShadowSettings.Application) this.application;
+                    if (app.theme_manager != null) {
+                        app.theme_manager.apply_theme (theme_values[idx]);
+                    }
+                }
+            });
+
+            appearance_group.add (theme_combo);
+
+            // Reduce motion toggle
+            var motion_switch = new Adw.SwitchRow ();
+            motion_switch.title = "Reduce Motion";
+            motion_switch.subtitle = "Disable animations within the app";
+
+            // Read persisted reduce-motion directly from GSettings
+            if (prefs_settings != null) {
+                motion_switch.active = prefs_settings.get_boolean ("reduce-motion");
+            }
+
+            // Wire switch to ThemeManager
+            motion_switch.notify["active"].connect (() => {
+                var app = (ShadowSettings.Application) this.application;
+                if (app.theme_manager != null) {
+                    app.theme_manager.set_reduce_motion (motion_switch.active);
+                }
+            });
+
+            appearance_group.add (motion_switch);
+            page.add (appearance_group);
+
+            return page;
         }
 
         /**
