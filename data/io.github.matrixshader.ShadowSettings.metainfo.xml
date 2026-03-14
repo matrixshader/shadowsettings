@@ -25,11 +25,11 @@
   <screenshots>
     <screenshot type="default">
       <caption>Shadow Settings showing the Desktop category</caption>
-      <image>https://raw.githubusercontent.com/matrixshader/shadow-settings/main/data/screenshots/main.png</image>
+      <image>https://raw.githubusercontent.com/matrixshader/shadowsettings/main/data/screenshots/main.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://matrixshader.com</url>
-  <url type="bugtracker">https://github.com/matrixshader/shadow-settings/issues</url>
+  <url type="bugtracker">https://github.com/matrixshader/shadowsettings/issues</url>
   <url type="donation">https://buymeacoffee.com/iknowkungfu</url>
   <developer id="io.github.matrixshader">
     <name>Matrix Shader</name>
