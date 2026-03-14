@@ -105,7 +105,7 @@ Plans:
 
 **Requirements addressed:** FR-6 (Search), NFR-2 (Performance), NFR-3 (Binary Size), NFR-4 (GNOME Compat), NFR-5 (Flatpak)
 
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [ ] 05-01-PLAN.md — Search UI with deprecated key filtering (FR-6, NFR-2)
