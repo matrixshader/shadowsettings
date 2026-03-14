@@ -37,6 +37,6 @@ namespace ShadowSettings {
     }
 
     public const string[] CATEGORY_ORDER = {
-        "desktop", "appearance", "windows", "input", "power", "privacy"
+        "desktop", "appearance", "windows", "input", "power", "accessibility", "privacy"
     };
 }
