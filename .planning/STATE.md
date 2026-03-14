@@ -4,18 +4,18 @@ milestone: v1.0
 milestone_name: milestone
 status: unknown
 stopped_at: Completed 04-02-PLAN.md (Phase 4 complete)
-last_updated: "2026-03-09T14:00:10.458Z"
+last_updated: "2026-03-14T20:48:35.042Z"
 progress:
   total_phases: 5
   completed_phases: 4
-  total_plans: 8
-  completed_plans: 8
+  total_plans: 10
+  completed_plans: 9
 ---
 
 # Shadow Settings — Project State
 
 ## Current Phase
-Phase 5: Search, Polish & Distribution (0 of 2 plans done)
+Phase 5: Search, Polish & Distribution (1 of 2 plans done)
 
 ## Progress
 - [x] Project initialized
@@ -74,6 +74,7 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | 03 | 03-02 (Panel Generation) | COMPLETE | 5min | b877e4d, 18144ad |
 | 04 | 04-01 (Theme Infrastructure) | COMPLETE | 5min | 063f095, 7417647 |
 | 04 | 04-02 (Animations, About & Icon) | COMPLETE | 5min | a2fe7d2, 7dcf25c, d4632d1 |
+| 05 | 05-01 (Search & Deprecated Key Filter) | COMPLETE | 2min | 5492344, a3eb71a |
 
 ## Key Decisions (Phase 3)
 | Decision | Choice | Rationale |
@@ -96,9 +97,17 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | AdwAboutWindow for About dialog | AdwAboutWindow (not AdwAboutDialog) | Available since libadwaita 1.2, ensuring GNOME 43+ compatibility per NFR-4 |
 | Gear icon only for prefs | No label, just gear icon in sidebar | Cleaner sidebar that doesn't compete with category names |
 
+## Key Decisions (Phase 5)
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Search results not animated | No Animator.cascade_rows() on search results | Animating on every keystroke at 150ms debounce rate is jarring |
+| DEPRECATED_KEYS filter position | Before curated override check in discover_all() | Ensures deprecated keys excluded regardless of registry presence |
+| Search stack cleanup | Remove old "search" child before each new search | Prevents unbounded content_stack accumulation on repeated searches |
+| last_panel_id tracking | Updated in row_selected handler | Always tracks most recently manually-selected panel for search dismissal restore |
+
 ## Last Session
-- **Stopped at:** Completed 04-02-PLAN.md (Phase 4 complete)
-- **Timestamp:** 2026-03-09T13:54:00Z
+- **Stopped at:** Completed 05-01-PLAN.md (Search & Deprecated Key Filter)
+- **Timestamp:** 2026-03-14T20:47:34Z
 
 ## Next Action
-Phase 5: Search, Polish & Distribution. Plan 05-01 is next.
+Phase 5: Search, Polish & Distribution. Plan 05-02 is next.
