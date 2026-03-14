@@ -22,8 +22,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://github.com/matrixshader/shadow-settings.git",
-                    "branch": "main"
+                    "url": "https://github.com/matrixshader/shadowsettings.git",
+                    "commit": "de986668afdf2b1d62839abbb489e52283739be9"
                 }
             ]
         }
