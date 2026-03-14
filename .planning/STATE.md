@@ -3,19 +3,19 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 04-02-PLAN.md (Phase 4 complete)
-last_updated: "2026-03-14T20:48:35.042Z"
+stopped_at: "Checkpoint: Task 3 human-verify in 05-02-PLAN.md"
+last_updated: "2026-03-14T20:52:53.712Z"
 progress:
   total_phases: 5
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 10
-  completed_plans: 9
+  completed_plans: 10
 ---
 
 # Shadow Settings — Project State
 
 ## Current Phase
-Phase 5: Search, Polish & Distribution (1 of 2 plans done)
+Phase 5: Search, Polish & Distribution (2 of 2 plans - awaiting human-verify checkpoint)
 
 ## Progress
 - [x] Project initialized
@@ -75,6 +75,7 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | 04 | 04-01 (Theme Infrastructure) | COMPLETE | 5min | 063f095, 7417647 |
 | 04 | 04-02 (Animations, About & Icon) | COMPLETE | 5min | a2fe7d2, 7dcf25c, d4632d1 |
 | 05 | 05-01 (Search & Deprecated Key Filter) | COMPLETE | 2min | 5492344, a3eb71a |
+| 05 | 05-02 (Distribution Packaging) | CHECKPOINT | 5min | 8a0e865, a2698dd |
 
 ## Key Decisions (Phase 3)
 | Decision | Choice | Rationale |
@@ -104,10 +105,13 @@ Location: `/home/neo/shadow-settings/` (renamed from `construct/`)
 | DEPRECATED_KEYS filter position | Before curated override check in discover_all() | Ensures deprecated keys excluded regardless of registry presence |
 | Search stack cleanup | Remove old "search" child before each new search | Prevents unbounded content_stack accumulation on repeated searches |
 | last_panel_id tracking | Updated in row_selected handler | Always tracks most recently manually-selected panel for search dismissal restore |
+| Flatpak finish-args minimal | No --filesystem=home, --socket=session-bus, --system-talk-name=org.freedesktop.login1 | logind auto-hidden via /.flatpak-info check (Phase 3); minimal sandbox for Flathub approval |
+| Flatpak runtime | org.gnome.Platform//48 | Latest stable GNOME runtime at time of submission |
+| Metainfo install path | share/metainfo/ (not share/appdata/) | Flathub requirement; appdata/ path is deprecated |
 
 ## Last Session
-- **Stopped at:** Completed 05-01-PLAN.md (Search & Deprecated Key Filter)
-- **Timestamp:** 2026-03-14T20:47:34Z
+- **Stopped at:** Checkpoint: Task 3 human-verify in 05-02-PLAN.md (distribution packaging complete, awaiting visual verification)
+- **Timestamp:** 2026-03-14T20:55:40Z
 
 ## Next Action
-Phase 5: Search, Polish & Distribution. Plan 05-02 is next.
+Human verification of Phase 5 complete output. Then Flathub submission steps (human-only: GitHub repo, screenshot, Flathub PR).
