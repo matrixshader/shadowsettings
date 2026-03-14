@@ -1,0 +1,31 @@
+{
+    "app-id": "io.github.matrixshader.ShadowSettings",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "48",
+    "sdk": "org.gnome.Sdk",
+    "command": "shadow-settings",
+    "finish-args": [
+        "--share=ipc",
+        "--socket=wayland",
+        "--socket=fallback-x11",
+        "--device=dri",
+        "--metadata=X-DConf=migrate-path=/io/github/matrixshader/ShadowSettings/"
+    ],
+    "modules": [
+        {
+            "name": "shadow-settings",
+            "builddir": true,
+            "buildsystem": "meson",
+            "config-opts": [
+                "--buildtype=release"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/matrixshader/shadow-settings.git",
+                    "branch": "main"
+                }
+            ]
+        }
+    ]
+}

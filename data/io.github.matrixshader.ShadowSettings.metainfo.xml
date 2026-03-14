@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.matrixshader.ShadowSettings</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>Shadow Settings</name>
+  <summary>The settings hiding in the shadow of your system</summary>
+  <description>
+    <p>
+      Shadow Settings dynamically discovers and surfaces hidden GNOME
+      desktop settings that are not exposed in the standard Settings app.
+      It scans your system at runtime to find settings specific to your
+      GNOME version and installed components.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Discovers hundreds of hidden GSettings keys automatically</li>
+      <li>Organizes settings into logical categories</li>
+      <li>Search across all discovered settings</li>
+      <li>Reset any setting to its default value</li>
+      <li>Three distinctive Art Deco visual themes</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">io.github.matrixshader.ShadowSettings.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Shadow Settings showing the Desktop category</caption>
+      <image>https://raw.githubusercontent.com/matrixshader/shadow-settings/main/data/screenshots/main.png</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://matrixshader.com</url>
+  <url type="bugtracker">https://github.com/matrixshader/shadow-settings/issues</url>
+  <url type="donation">https://buymeacoffee.com/iknowkungfu</url>
+  <developer id="io.github.matrixshader">
+    <name>Matrix Shader</name>
+  </developer>
+  <content_rating type="oars-1.1" />
+  <releases>
+    <release version="1.0.0" date="2026-03-13">
+      <description>
+        <p>Initial release.</p>
+      </description>
+    </release>
+  </releases>
+</component>

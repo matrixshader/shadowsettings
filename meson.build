@@ -76,4 +76,9 @@ install_data(
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas',
 )
 
+install_data(
+  'data/io.github.matrixshader.ShadowSettings.metainfo.xml',
+  install_dir: get_option('datadir') / 'metainfo',
+)
+
 gnome.post_install(glib_compile_schemas: true)
