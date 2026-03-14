@@ -23,7 +23,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/matrixshader/shadowsettings.git",
-                    "commit": "de986668afdf2b1d62839abbb489e52283739be9"
+                    "commit": "7b5d669ddb316034a397ff8bace762cdc9edff32"
                 }
             ]
         }
