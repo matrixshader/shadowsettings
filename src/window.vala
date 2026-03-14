@@ -9,6 +9,13 @@ namespace ShadowSettings {
         private SchemaScanner scanner;
         private HashTable<string, bool> panels_built;
 
+        /* Search UI */
+        private Gtk.SearchBar search_bar;
+        private Gtk.SearchEntry search_entry;
+        private string last_panel_id = "";
+        private Adw.WindowTitle sidebar_title;
+        private int display_count;
+
         public Window (Adw.Application app) {
             Object (
                 application: app,
@@ -24,18 +31,18 @@ namespace ShadowSettings {
 
             panels_built = new HashTable<string, bool> (str_hash, str_equal);
 
-            // --- Build full registry from all curated setting files ---
-            SettingDef[] full_registry = {};
-            foreach (var def in Registry.get_desktop_settings ()) full_registry += def;
-            foreach (var def in Registry.get_appearance_settings ()) full_registry += def;
-            foreach (var def in Registry.get_windows_settings ()) full_registry += def;
-            foreach (var def in Registry.get_input_settings ()) full_registry += def;
+            // --- Build curated registry as enhancement layer ---
+            SettingDef[] curated_overrides = {};
+            foreach (var def in Registry.get_desktop_settings ()) curated_overrides += def;
+            foreach (var def in Registry.get_appearance_settings ()) curated_overrides += def;
+            foreach (var def in Registry.get_windows_settings ()) curated_overrides += def;
+            foreach (var def in Registry.get_input_settings ()) curated_overrides += def;
             // Skip power.vala entries (CUSTOM/logind -- handled separately below)
-            foreach (var def in Registry.get_privacy_settings ()) full_registry += def;
+            foreach (var def in Registry.get_privacy_settings ()) curated_overrides += def;
 
-            // --- Run SchemaScanner to filter to available settings ---
+            // --- True auto-discovery: enumerate ALL system schemas ---
             scanner = new SchemaScanner ();
-            var available = scanner.scan (full_registry);
+            var available = scanner.discover_all (curated_overrides);
 
             // --- Run CategoryMapper to group into ordered categories ---
             var mapper = new CategoryMapper ();
@@ -61,6 +68,34 @@ namespace ShadowSettings {
                 content_stack.add_named (new ShadowSettings.PowerPanel (), "power");
                 has_power = true;
             }
+
+            // --- Search UI ---
+            search_entry = new Gtk.SearchEntry ();
+            search_entry.placeholder_text = "Search settings\u2026";
+            search_entry.hexpand = true;
+
+            search_bar = new Gtk.SearchBar ();
+            search_bar.child = search_entry;
+            search_bar.show_close_button = false;
+            search_bar.set_key_capture_widget (this);
+
+            search_entry.search_changed.connect (() => {
+                perform_search (search_entry.text);
+            });
+            search_entry.stop_search.connect (() => {
+                search_bar.search_mode_enabled = false;
+            });
+
+            search_bar.notify["search-mode-enabled"].connect (() => {
+                if (!search_bar.search_mode_enabled) {
+                    // Restore previous panel
+                    if (last_panel_id.length > 0) {
+                        content_stack.visible_child_name = last_panel_id;
+                    }
+                    // Restore original subtitle
+                    sidebar_title.subtitle = "%d hidden settings found".printf (display_count);
+                }
+            });
 
             // --- Sidebar ---
             sidebar_list = new Gtk.ListBox ();
@@ -104,6 +139,9 @@ namespace ShadowSettings {
                 var panel_id = action_row.get_data<string> ("panel-id");
                 if (panel_id == null) return;
 
+                // Track last visited panel for search dismissal restore
+                last_panel_id = panel_id;
+
                 // Lazy build: construct page on first visit
                 if (!panels_built.contains (panel_id) && panel_id != "power" && panel_id != "preferences") {
                     // Find the CategoryInfo for this panel_id
@@ -131,17 +169,27 @@ namespace ShadowSettings {
 
             // --- Sidebar page with settings count ---
             var sidebar_header = new Adw.HeaderBar ();
-            int display_count = scanner.total_available;
+            display_count = scanner.total_available;
             if (has_power) {
                 display_count += 2; // logind lid-close entries
             }
-            sidebar_header.title_widget = new Adw.WindowTitle (
+            sidebar_title = new Adw.WindowTitle (
                 "Shadow Settings",
                 "%d hidden settings found".printf (display_count)
             );
+            sidebar_header.title_widget = sidebar_title;
+
+            // Search toggle button
+            var search_btn = new Gtk.ToggleButton ();
+            search_btn.icon_name = "edit-find-symbolic";
+            search_btn.tooltip_text = "Search settings (Ctrl+F)";
+            search_btn.bind_property ("active", search_bar, "search-mode-enabled",
+                GLib.BindingFlags.BIDIRECTIONAL);
+            sidebar_header.pack_end (search_btn);
 
             var sidebar_page = new Adw.ToolbarView ();
             sidebar_page.add_top_bar (sidebar_header);
+            sidebar_page.add_top_bar (search_bar);
 
             var sidebar_scroll = new Gtk.ScrolledWindow ();
             sidebar_scroll.child = sidebar_list;
@@ -176,6 +224,19 @@ namespace ShadowSettings {
             split_view.max_sidebar_width = 280;
 
             this.content = split_view;
+
+            // Ctrl+F shortcut to activate search
+            var shortcut_ctrl = new Gtk.ShortcutController ();
+            shortcut_ctrl.scope = Gtk.ShortcutScope.MANAGED;
+            shortcut_ctrl.add_shortcut (new Gtk.Shortcut (
+                Gtk.ShortcutTrigger.parse_string ("<Control>f"),
+                new Gtk.CallbackAction ((widget, args) => {
+                    search_bar.search_mode_enabled = true;
+                    search_entry.grab_focus ();
+                    return true;
+                })
+            ));
+            this.add_controller (shortcut_ctrl);
 
             // Select first category row (skip preferences row = index 1)
             sidebar_list.select_row (sidebar_list.get_row_at_index (1));
@@ -256,6 +317,68 @@ namespace ShadowSettings {
             page.add (appearance_group);
 
             return page;
+        }
+
+        /**
+         * Performs a search across all categories and displays results in the
+         * content stack. Cleans up previous search results on each invocation.
+         */
+        private void perform_search (string query) {
+            if (query.length == 0) {
+                if (last_panel_id.length > 0) {
+                    content_stack.visible_child_name = last_panel_id;
+                }
+                sidebar_title.subtitle = "%d hidden settings found".printf (display_count);
+                return;
+            }
+
+            string q = query.down ();
+            var results_page = new Adw.PreferencesPage ();
+            results_page.title = "Search Results";
+            int total_matches = 0;
+
+            foreach (var cat in categories) {
+                var group = new Adw.PreferencesGroup ();
+                group.title = cat.title;
+                int group_count = 0;
+
+                foreach (var def in cat.settings) {
+                    bool hits_label = def.label.down ().contains (q);
+                    bool hits_subtitle = (def.subtitle != null) && def.subtitle.down ().contains (q);
+                    if (hits_label || hits_subtitle) {
+                        var widget = WidgetFactory.create_row (def, scanner);
+                        if (widget != null) {
+                            group.add (widget);
+                            group_count++;
+                        }
+                    }
+                }
+
+                if (group_count > 0) {
+                    results_page.add (group);
+                    total_matches += group_count;
+                }
+            }
+
+            // Remove old search results to prevent stack accumulation
+            var old = content_stack.get_child_by_name ("search");
+            if (old != null) content_stack.remove (old);
+
+            if (total_matches > 0) {
+                content_stack.add_named (results_page, "search");
+                content_stack.visible_child_name = "search";
+            } else {
+                // No results — show empty state (GNOME HIG)
+                var empty = new Adw.StatusPage ();
+                empty.icon_name = "edit-find-symbolic";
+                empty.title = "No Results";
+                empty.description = "No settings match \u201c%s\u201d".printf (query);
+                content_stack.add_named (empty, "search");
+                content_stack.visible_child_name = "search";
+            }
+
+            // Update sidebar subtitle with match count (restored on dismiss)
+            sidebar_title.subtitle = "%d result%s".printf (total_matches, total_matches == 1 ? "" : "s");
         }
 
         /**
